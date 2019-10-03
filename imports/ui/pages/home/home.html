@@ -1,0 +1,15 @@
+<template name="homePage">
+    <div class="ui grid">
+        <div class="row">
+            <div class="eight wide column">
+                {{> createTrip}}
+            </div>
+
+            {{#if tempTrip}}
+            <div class="eight wide column">
+                {{> summaryTrip trip=tempTrip}}
+            </div>
+            {{/if}}
+        </div>
+    </div>
+</template>

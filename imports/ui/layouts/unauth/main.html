@@ -1,0 +1,25 @@
+<template name="mainUnauthLayout">
+    <div class="ui container" style="margin-top: 20px;">
+        <div class="ui secondary menu">
+            <a class="item" href="/">
+                How it works
+            </a>
+            
+            <div class="right menu">
+                <div class="item">
+                    <div class="ui icon input">
+                        <input placeholder="Search..." type="text">
+                        <i class="search link icon"></i>
+                    </div>
+                </div>
+                <button class="ui item">
+                    <a href="/signup" class="ui teal button">
+                        Become Traveler
+                    </a>
+                </button>
+            </div>
+        </div>
+
+        {{> Template.dynamic template=main}}
+    </div>
+</template>

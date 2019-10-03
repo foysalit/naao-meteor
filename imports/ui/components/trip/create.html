@@ -1,0 +1,165 @@
+<template name="createTrip">
+    <div class="ui segment">
+        <h3>Where are you traveling to?</h3>
+
+        <form action="#" class="ui form">
+            <div class="fields">
+                <div class="field">
+                    <label for="collectBy">Collect By</label>
+                    <div class="ui calendar collect-by-calendar">
+                        <div class="ui input left icon">
+                            <i class="calendar icon"></i>
+                            <input 
+                                value="{{ day filters.collectBy }}"
+                                type="text"
+                                name="collect_by"
+                                placeholder="Date">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="field">
+                    <label for="from">Departure</label>
+                    <input 
+                        name="from"
+                        type="text" 
+                        value="{{ filters.from.description }}"
+                        placeholder="New York, London....">
+                </div>
+            </div>
+
+            <div class="fields">
+                <div class="field">
+                    <label for="deliveryBy">Delivery By</label>
+                    <div class="ui calendar delivery-by-calendar">
+                        <div class="ui input left icon">
+                            <i class="calendar icon"></i>
+                            <input 
+                                value="{{ day filters.deliveryBy }}"
+                                type="text"
+                                name="delivery_by"
+                                placeholder="Date">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="field">
+                    <label for="to">Arrival</label>
+                    <input 
+                        name="to"
+                        type="text" 
+                        value="{{ filters.to.description }}"
+                        placeholder="Dhaka, Milan....">
+                </div>
+            </div>
+
+            <h3>How empty is your luggage?</h3>
+
+            <div class="seven wide field">
+                <label for="weight">Max Weight</label>
+                <div class="ui right labeled input">
+                    <input 
+                        value="{{ filters.availableSpace.weight }}"
+                        placeholder="Weight in kg" 
+                        class="parcel-space"
+                        name="weight"
+                        type="text">
+                    <div class="ui basic label">
+                        kg
+                    </div>
+                </div>
+            </div>
+
+            <div>
+                <p>
+                    <b>Max Size</b>
+                </p>
+            </div>
+            <div class="fields">
+                <div class="three wide field">
+                    <input 
+                        value="{{ tempTrip.totalSpace.len }}" 
+                        class="parcel-space" 
+                        type="number"
+                        name="len">
+                </div>
+
+                <div class="three wide field">
+                    <input 
+                        value="{{ tempTrip.totalSpace.width }}"
+                        class="parcel-space"
+                        type="number"
+                        name="width">
+                </div>  
+                
+                <div class="one wide field">
+                    <i class="close icon" style="line-height: 2.5em;"></i>
+                </div>
+
+                <div class="three wide field">
+                    <input 
+                        value="{{ tempTrip.totalSpace.height }}" 
+                        class="parcel-space"
+                        type="number"
+                        name="height">
+                </div>  
+                
+                <div class="one wide field">
+                    <i class="close icon" style="line-height: 2.5em;"></i>
+                </div>
+
+                <div class="five wide field">
+                    <select name="unit" class="ui fluid dropdown">
+                        <option value="cm">cm</option>
+                        <option value="in">in</option>
+                    </select>
+                </div>
+            </div>
+
+            <button class="ui fluid green button">
+                Post Trip
+            </button>
+        </form>
+
+        {{#if errors}}
+        <div class="ui negative icon message">
+            <i class="warning sign icon"></i>
+            <div class="content">
+                <div class="header">
+                    Please fix the following issues...
+                </div>
+                {{#each errors}}
+                    <p>
+                        {{ this }}
+                    </p>
+                {{/each}}
+            </div>
+        </div>
+        {{/if}}
+    </div>
+
+    <div class="ui tiny modal" id="create_trip_confirmation_modal">
+        <div class="header">You're about to make your list public</div>
+        <div class="content">
+            <p>
+                {{#if currentUser}}
+                    Senders can see your trip and book space in your luggage.
+                {{else}}
+                    We have saved your trip but before we let senders see your trip we need to know a just a couple more things about you.
+                {{/if}}
+            </p>
+        </div>
+        <div class="actions">
+            <button class="ui {{#if creator.working}}loading{{/if}} positive button">
+                {{#if currentUser}}
+                    Let's go
+                {{else}}
+                    I'm ready
+                {{/if}}
+            </button>
+            <button class="ui negative button">
+                Cancel
+            </button>
+        </div>
+    </div>
+</template>

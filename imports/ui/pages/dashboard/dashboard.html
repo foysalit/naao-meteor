@@ -1,0 +1,24 @@
+<template name="dashboardPage">
+    <div class="ui grid">
+        <div class="row">
+            <div class="eight wide column">
+                <h3 class="ui block header">
+                    <i class="plane icon"></i>
+                    <div class="content">Your Trips</div>
+                </h3>
+                {{#unless myTrips}}
+                    <div class="ui message warning">
+                        <p>
+                            You do not have any upcoming or past trips.<br/>
+                            If you're going somewhere and would like to carry a parcel for someone, feel free create a trip so that senders can contact you.
+                        </p>
+                    </div>
+                {{/unless}}
+
+                {{#each myTrips}}
+                    {{> summaryTrip trip=this}}
+                {{/each}}
+            </div>
+        </div>
+    </div>
+</template>

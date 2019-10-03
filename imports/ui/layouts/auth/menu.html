@@ -1,0 +1,25 @@
+<template name="menuAuthLayout">
+    <div class="ui secondary menu">
+        <a class="item {{#if isCurrentRoute 'my-trips'}}active{{/if}}" href="/my-trips">
+            Trips
+        </a>
+        <a class="item {{#if isCurrentRoute 'my-parcels'}}active{{/if}}" href="/my-parcels">
+            Parcels
+        </a>
+        <a class="item {{#if isCurrentRoute 'settings'}}active{{/if}}" href="/settings">
+            Settings
+        </a>
+    
+        <div class="right menu">
+            <div class="item">
+                <div class="ui icon input">
+                    <input placeholder="Search..." type="text">
+                    <i class="search link icon"></i>
+                </div>
+            </div>
+            <a class="ui item logout">
+                Logout
+            </a>
+        </div>
+    </div>
+</template>

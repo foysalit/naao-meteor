@@ -1,0 +1,110 @@
+<template name="summaryParcel">
+    {{> stagesParcel}}
+
+    <div class="ui horizontal fluid segments">
+        <div class="ui segment">
+            <h4 class="header">
+                {{#if parcel.isAccepted}}
+                    Scheduled For Delivery
+                {{else}}
+                    {{#if parcel.isDenied}}
+                        Offer Denied
+                    {{else}}
+                        Your Offer
+                    {{/if}}
+                {{/if}}
+            </h4>
+
+            <p>
+                <i class="calendar icon"></i> {{ day parcel.offerAt }}
+            </p>
+
+            {{#with parcel.size}}
+            <p>
+                <i class="cube icon"></i> {{ len }} x {{ width }} x {{ height }} {{ unit }}
+            </p>
+            {{/with}}
+
+            <p>
+                <i class="dollar icon"></i> {{ parcel.offer }}
+            </p>
+
+        </div>
+
+        <div class="ui segment">
+            {{#if parcel.counterOffer}} 
+                <h4 class="header">
+                    Counter Offer
+                </h4>
+                <p>
+                    <i class="calendar icon"></i>
+                    {{ day parcel.counterOfferAt }}
+                </p>
+                
+                <p>
+                    <i class="dollar icon"></i>
+                    {{ parcel.counterOffer }}
+                </p>
+
+                {{#unless parcel.closedAt}}
+                    <p>
+                        <div class="ui buttons">
+                            <button class="ui positive button accept-js">Accept</button>
+                            <div class="or"></div>
+                            <button class="ui negative button reject-s">Reject</button>
+                        </div>
+                    </p>
+                {{/unless}}
+            {{/if}}
+
+            {{#if parcel.closedAt}} 
+                <h4 class="header">
+                    {{#if parcel.isRejected}} 
+                        Offer Rejected
+                    {{else}} 
+                        Offer Accepted
+                    {{/if}}
+                </h4>
+                
+                <p>
+                    <i class="calendar icon"></i>
+                    {{ day parcel.closedAt }}
+                </p>
+                
+                <p>
+                    <i class="user icon"></i>
+                    {{#if parcel.counterOffer}}
+                        by <b>you</b>
+                    {{else}}
+                        by <b>{{ parcel.trip.traveler.profile.name }}</b>
+                    {{/if}}
+                </p>
+            {{else}}
+                <h4 class="header">
+                    Waiting For Response
+                </h4>
+                
+                <p>
+                    {{ parcel.trip.traveler.profile.name }} has to respond before {{ day parcel.trip.collectBy }}
+                </p>
+            {{/if}}
+        </div>
+    </div>
+
+    <div class="ui tiny modal confirmation-modal-js">
+        <div class="header"> {{ modal.header }} </div>
+        <div class="content">
+            <p>
+                {{ modal.content }}
+            </p>
+        </div>
+        <div class="actions">
+            <button class="ui positive button confirmation-modal-positive-js">
+                Let's go
+            </button>
+            <button class="ui negative button confirmation-modal-negative-js">
+                Cancel
+            </button>
+        </div>
+    </div>
+</template>

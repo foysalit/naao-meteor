@@ -1,0 +1,53 @@
+<template name="showProfileUsers">
+    <div class="ui fluid card">
+        <div class="content">
+            <img class="right floated mini ui circular image" src="http://i.pravatar.cc/100">
+            <div class="header">
+                {{ user.profile.name }}
+            </div>
+            <div class="meta">
+                {{#if user.profile.address}}
+                    <i class="marker icon"></i>
+                    {{ user.profile.address }}
+                {{else}}
+                    No Address Specified
+                {{/if}}
+            </div>
+    
+            <div class="description">
+                {{#if equals currentUser._id user._id}}
+                    {{#each user.emails}}
+                        <b>{{ address }}</b><br/>            
+                    {{/each}}
+                {{/if}}
+                 
+                <p>
+                {{#if user.profile.bio}}
+                    {{ user.profile.bio }}        
+                {{else}}
+                    User has not written a bio yet...
+                {{/if}}
+                </p>
+            </div>
+        </div>
+        <div class="extra content">
+            <div class="left floated">
+                <i class="plane icon"></i>
+                {{#if user.tripsCount}}
+                    {{ user.tripsCount }} Trips
+                {{else}}
+                    No Trips
+                {{/if}}
+            </div>
+
+            <div class="right floated">
+                <i class="plane icon"></i>
+                {{#if user.parcelsCount}}
+                    {{ user.parcelsCount }} Parcels Delivered
+                {{else}}
+                    No Parcel Delivered
+                {{/if}}
+            </div>
+        </div>
+    </div>
+</template>

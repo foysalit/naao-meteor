@@ -1,0 +1,27 @@
+<template name="mainSettingsPage">
+    <div class="ui grid">
+        <div class="row">
+            <div class="eight wide column">
+                <h3 class="ui block header">
+                    <a href="#" class="toggle-profile-editor-js">
+                        {{#if state.showEdit}}
+                            <i class="close icon"></i>
+                        {{else}}
+                            <i class="pencil icon"></i>
+                        {{/if}}
+                    </a>
+                    <div class="content">
+                        Your Profile
+                    </div>
+
+                </h3>
+
+                {{> showProfileUsers user=currentUser }}
+                
+                {{#if state.showEdit}}
+                    {{> createProfileUsers }}
+                {{/if}}    
+            </div>
+        </div>
+    </div>
+</template>

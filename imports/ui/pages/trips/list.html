@@ -1,0 +1,73 @@
+<template name="listTripsPage">
+    <div class="ui grid">
+        <div class="row">
+            <div class="ten wide column">
+                <div class="ui segment">
+                    <h4 class="header">
+                        Find the traveler you're looking for...
+                    </h4>
+                    
+                    <div class="content">
+                        <form action="#" class="ui form">
+                            <div class="fields">
+                                <div class="field">
+                                    <label for="collectBy">Collect By</label>
+                                    <div class="ui calendar collect-by-calendar">
+                                        <div class="ui input left icon">
+                                            <i class="calendar icon"></i>
+                                            <input value="{{ day filters.collectBy }}" type="text" name="collect_by" placeholder="Date">
+                                        </div>
+                                    </div>
+                                </div>
+                            
+                                <div class="field">
+                                    <label for="from">Departure</label>
+                                    <input name="from" type="text" value="{{ filters.from.description }}" placeholder="New York, London....">
+                                </div>
+
+                                <div class="field">
+                                    <label for="weight">Available Weight</label>
+                                    <div class="ui right labeled input">
+                                        <input value="{{ filters.totalSpace.weight }}" placeholder="Weight in kg" class="parcel-space" name="weight" type="text">
+                                        <div class="ui basic label">
+                                            kg
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="fields">
+                                <div class="field">
+                                    <label for="deliveryBy">Delivery By</label>
+                                    <div class="ui calendar delivery-by-calendar">
+                                        <div class="ui input left icon">
+                                            <i class="calendar icon"></i>
+                                            <input type="text" name="delivery_by" placeholder="Date">
+                                        </div>
+                                    </div>
+                                </div>
+                            
+                                <div class="field">
+                                    <label for="to">Arrival</label>
+                                    <input name="to" type="text" value="{{ filters.to.description }}" placeholder="Dhaka, Milan....">
+                                </div>
+
+                                <div class="field">
+                                    <label>&nbsp;</label>
+                                    <button class="ui labeled icon button reset-filters-js" type="button">
+                                        <i class="close icon"></i>
+                                        Reset
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            {{> listTrip trips=trips}}
+        </div>
+    </div>
+</template>

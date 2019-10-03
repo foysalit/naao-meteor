@@ -1,0 +1,71 @@
+<template name="createProfileUsers">
+    <div class="ui segment fade up">
+        <h3>Update Your Profile</h3>
+
+        <form action="#" class="ui form">
+            <div class="field">
+                <label for="name">Your Full Name</label>
+                <div class="ui input">
+                    <input 
+                        value="{{ currentUser.profile.name }}" 
+                        placeholder="Mark Jhonson" 
+                        name="name" 
+                        type="text" />
+                </div>
+            </div>
+
+            <div class="field">
+                <label for="name">Your Phone Number</label>
+                <div class="ui input">
+                    <input 
+                        value="{{ currentUser.profile.phone }}" 
+                        placeholder="3279022331" 
+                        name="phone" 
+                        type="text" />
+                </div>
+            </div>
+
+            <div class="field">
+                <label for="name">Current Address</label>
+                <div class="ui input">
+                    <input 
+                        value="{{ currentUser.profile.address }}" 
+                        placeholder="123 North St. Milan" 
+                        name="address" 
+                        type="text" />
+                </div>
+            </div>
+
+            <button class="ui fluid green button">
+                Save Profile
+            </button>
+        </form>
+    </div>
+
+    {{#if errors}}
+        <div class="ui negative icon message">
+            <i class="warning sign icon"></i>
+            <div class="content">
+                <div class="header">
+                    Please fix the following issues...
+                </div>
+                {{#each errors}}
+                <p>
+                    {{ this }}
+                </p>
+                {{/each}}
+            </div>
+        </div> 
+    {{/if}}
+
+    {{#if creator.updated}}
+        <div class="ui positive icon message">
+            <i class="checkmark icon"></i>
+            <div class="content">
+                <div class="header">
+                    Successfully updated Your profile.
+                </div>
+            </div>
+        </div>
+    {{/if}}
+</template>

@@ -1,0 +1,87 @@
+<template name="summaryTrip">
+<div class="ui fluid card summary-trip">
+    <div class="content">
+        <div class="ui grid">
+            <div class="seven wide column right aligned">
+                <div class="summary-trip-location">
+                    <b>{{ trip.from.description }}</b>
+                </div>
+                <div class="meta">
+                    <span class="date">
+                        {{ day trip.collectBy }}
+                    </span>
+                </div>
+            </div>
+            <div class="two wide column">
+                <i class="plane icon"></i>
+            </div>
+            <div class="seven wide column">
+                <div class="summary-trip-location">
+                    <b>{{ trip.to.description }}</b>
+                </div>
+                <div class="meta">
+                    <span class="date">
+                        {{ day trip.deliveryBy }}
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="image">
+        <div class="map-container">
+            {{> googleMap name=trip._id options=tripMapOptions}}
+        </div>
+    </div>
+    
+    <div class="content">
+        <div class="ui stackable grid">
+            <div class="five wide column">
+                {{#with trip.totalSpace}}
+                <h4 class="header">
+                    Max
+                </h4>
+                <p>
+                    {{ weight }} kg
+                    <br> {{ len }}x{{ width }}x{{ height }} {{ unit }}
+                </p>
+                {{/with}}
+            </div>
+            <div class="five wide column">
+                {{#with trip.availableSpace}}
+                <h4 class="header">Available</h4>
+                <p>
+                    {{ weight }} kg
+                    <br> {{ len }}x{{ width }}x{{ height }} {{ unit }}
+                </p>
+                {{/with}}
+            </div>
+
+            <div class="six wide column">
+                <p>Rating: 5 star</p>
+                <p>Parcels Booked: {{ parcelCount }}</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="extra content">
+        <div class="left floated author">
+            <img class="ui avatar image" src="http://i.pravatar.cc/100"> 
+            {{ trip.traveler.profile.name }}
+        </div>
+        {{#if canBook}}
+            <div class="ui green right floated button book-js">
+                {{#if userHasBooked}}
+                    View Booking
+                {{else}}
+                    Book Now
+                {{/if}}
+            </div>
+        {{else}}
+            <a class="ui green right floated button" href="/trips/{{ trip._id }}">
+                View Bookings
+            </a>
+        {{/if}}
+    </div>
+</div>
+</template>

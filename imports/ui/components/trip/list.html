@@ -1,0 +1,35 @@
+<template name="listTrip">
+    <div class="trip-side-panel-js">
+        <div class="trip-side-panel-content">
+        {{#if state.viewingTrip}}
+            <div class="ui grid">
+                <div class="row">
+                    <div class="column right aligned">
+                        <button class="circular ui icon button trip-side-panel-close-js">
+                            <i class="icon close"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="row">
+                    {{> summaryTrip trip=state.viewingTrip isViewingTrip=true}}
+                    
+                    {{#if userHasBooked}}
+                        <div class="sixteen wide column">
+                        {{> summaryParcel parcel=userHasBooked}}
+                        </div>
+                    {{else}}
+                        {{> createParcel trip=state.viewingTrip}}
+                    {{/if}}
+                </div>
+            </div>
+        {{/if}}
+        </div>
+    </div>
+    
+    {{#each trips}}
+    <div class="eight wide column">
+        {{> summaryTrip trip=this}}
+    </div>
+    {{/each}}
+</template>

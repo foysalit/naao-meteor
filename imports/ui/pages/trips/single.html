@@ -1,0 +1,89 @@
+<template name="singleTripsPage">
+    <div class="ui grid">
+        {{#if state.dataReady}}
+            <div class="row">
+                {{> summaryTrip trip=trip isViewingTrip=true}}
+            </div>
+
+            <div class="row">
+                {{#each trip.parcels}}
+                    <div class="five wide column">
+                        {{> singleParcel parcel=this}}
+                    </div>
+                {{/each}}
+            </div>
+        {{/if}}
+    </div>
+</template>
+
+<template name="singleParcel">
+    <div class="ui fluid card single-parcel">
+        {{#with parcel.owner}}
+            <div class="content">
+                <img 
+                    class="ui avatar image" 
+                    src="http://i.pravatar.cc/100"> 
+                {{ profile.name }}
+
+                <a href="#"><i class="right floated check circle outline icon accept-js"></i></a>
+                <a href="#"><i class="right floated remove circle outline icon reject-js"></i></a>
+            </div>
+        {{/with}}
+        
+        <div class="content">
+            <p>
+                <i class="calendar icon"></i> {{ day parcel.offerAt }}
+            </p>
+            
+            {{#with parcel.size}}
+            <p>
+                <i class="cube icon"></i> {{ len }} x {{ width }} x {{ height }} {{ unit }}
+            </p>
+            {{/with}}
+            
+            <p>
+                <i class="dollar icon"></i> {{ parcel.offer }}
+            </p>
+        </div>
+
+        <div class="extra content">
+            {{#if parcel.closedAt}}
+                <a href="#">
+                    {{#if parcel.isAccepted}}
+                    <i class="green check icon"></i>
+                    {{else}}
+                    <i class="red remove icon"></i>
+                    {{/if}} {{#if parcel.counterOffer}} {{ parcel.owner.profile.name }} {{else}} {{ parcel.trip.traveler.profile.name }} {{/if}}
+                </a>
+                
+                <span class="right floated">
+                    {{ day parcel.closedAt }}
+                </span>
+            {{else}}
+                {{#unless parcel.counterOffer}}
+                    <div class="ui large transparent left icon input">
+                        <i class="dollar icon submit-counter-offer-js"></i>
+                        <input type="text" name="counter-offer" placeholder="Counter Offer...">
+                    </div>
+                {{/unless}}
+            {{/if}}
+        </div>
+    </div>
+
+    <div class="ui tiny modal confirmation-modal-js">
+        <div class="header"> {{ modal.header }} </div>
+        <div class="content">
+            <p>
+                {{ modal.content }}
+            </p>
+        </div>
+        <div class="actions">
+            <button class="ui positive button confirmation-modal-positive-js">
+                Let's go
+            </button>
+            <button class="ui negative button confirmation-modal-negative-js">
+                Cancel
+            </button>
+        </div>
+    </div>
+</template>

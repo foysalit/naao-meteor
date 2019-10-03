@@ -1,0 +1,114 @@
+<template name="createParcel">
+    <div class="ui segment">
+        <h4 class="header">
+            Make an offer they can't refuse...
+        </h4>
+        <form action="#" class="ui form">
+            <div class="fields">
+                <div class="field">
+                    <label for="weight">Offer $</label>
+                    <div class="ui right labeled input">
+                        <input 
+                            value="{{ parcel.offer }}" 
+                            placeholder="Offer in $" 
+                            class="parcel-offer" 
+                            name="offer" 
+                            type="text">
+                        <div class="ui basic label">
+                            USD
+                        </div>
+                    </div>
+                </div>
+                <div class="field">
+                    <label for="weight">Parcel Weight</label>
+                    <div class="ui right labeled input">
+                        <input value="{{ parcel.size.weight }}" placeholder="Weight in kg" class="parcel-space" name="weight" type="text">
+                        <div class="ui basic label">
+                            kg
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <p>
+                    <b>Parcel Size</b>
+                </p>
+            </div>
+            <div class="fields">
+                <div class="three wide field">
+                    <input value="{{ tempTrip.size.len }}" class="parcel-space" type="number" name="len">
+                </div>
+            
+                <div class="one wide field">
+                    <i class="close icon" style="line-height: 2.5em;"></i>
+                </div>
+                
+                <div class="three wide field">
+                    <input value="{{ tempTrip.size.width }}" class="parcel-space" type="number" name="width">
+                </div>
+            
+                <div class="one wide field">
+                    <i class="close icon" style="line-height: 2.5em;"></i>
+                </div>
+            
+                <div class="three wide field">
+                    <input value="{{ tempTrip.size.height }}" class="parcel-space" type="number" name="height">
+                </div>
+            
+                <div class="five wide field">
+                    <select name="unit" class="ui fluid dropdown">
+                        <option value="cm">cm</option>
+                        <option value="in">in</option>
+                    </select>
+                </div>
+            </div>
+            <button class="ui fluid green button">
+                Send Offer
+            </button>
+        </form>
+    </div>
+
+    {{#if creator.errors}}
+    <div class="ui negative icon message">
+        <i class="warning sign icon"></i>
+        <div class="content">
+            <div class="header">
+                Please fix the following issues...
+            </div>
+            {{#each creator.errors}}
+            <p>
+                {{ this }}
+            </p>
+            {{/each}}
+        </div>
+    </div>
+    {{/if}}
+
+    <div class="ui tiny modal" id="create_parcel_confirmation_modal">
+        <div class="header">Confirm Offer</div>
+        <div class="content">
+            <p>
+                {{#if currentUser}} 
+                    You're offering {{ parcel.offer }} USD for parcel. <br/>
+                    Parcel Weight: {{ parcel.weight }} <br/>
+                    Parcel Size: {{ parcel.size.len }} x {{ parcel.size.len }} x {{ parcel.size.len }} {{ parcel.size.unit }}
+                {{else}} 
+                    We have saved your ofer but before we send the offer to the traveler you need to create an account. 
+                {{/if}}
+            </p>
+        </div>
+        <div class="actions">
+            <button class="ui {{#if creator.working}}loading{{/if}} positive button">
+                {{#if currentUser}} 
+                    Send Offer
+                {{else}} 
+                    Create Account 
+                {{/if}}
+            </button>
+            <button class="ui negative button">
+                Cancel
+            </button>
+        </div>
+    </div>
+</template>
